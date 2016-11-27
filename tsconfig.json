@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true , 
+        "module": "commonjs",
+        "target": "ES5", 
+        "rootDir": "."
+        
+         
+        
+    },
+    "include": [
+        "typings/cocos2d-lib.d.ts",
+        "src/**/*.ts"
+    ]
+    
+    
+    
+}
