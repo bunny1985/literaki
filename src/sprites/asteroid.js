@@ -14,7 +14,7 @@ var Asteroid = cc.Sprite.extend({
         var rotation = new cc.RotateBy(Math.random(), 90, 90);
         this.runAction(cc.RepeatForever.create(rotation));
         this.runAction(cc.Sequence.create(
-            new cc.ScaleTo(this.timeInSeconds , 6.0, 6.0), 
+            new cc.EaseIn(new cc.ScaleTo(this.timeInSeconds , 6.0, 6.0) ,2 ), 
             cc.CallFunc.create(this.hit, this)
         ));
         this.letter = this.pickletter(1);

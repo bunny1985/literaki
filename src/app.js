@@ -9,7 +9,7 @@ var HelloWorldLayer = cc.Layer.extend({
     explode: function(){
         this.points+=10;
         if(this.points%100==0){
-            this.time = 25 - ((this.points/100)*3 );
+            this.time = 25 - ((this.points/100) );
         }
         this.labelpoints.setString("Points:" + this.points);
         this.asteroidready = false;
@@ -28,7 +28,10 @@ var HelloWorldLayer = cc.Layer.extend({
         ));
     },
     generateAsteroid : function(){
-        if(this.lives<=0)return;
+        if(this.lives<=0){
+            this.startbutton.setVisible(true);
+            return;
+        };
         this.labelletter.setVisible(false);
         this.sprite = new Asteroid(this.time);
         this.labelletter.setString("Literka:" + this.sprite.letter);
@@ -49,8 +52,9 @@ var HelloWorldLayer = cc.Layer.extend({
         this.splat.setOpacity(255);
         this.lives-=1;
         this.labellives.setString("Lives:" + this.lives)
-        if(this.lives == 0 ){
+        if(this.lives <= 0 ){
             this.sprite.setVisible(false);
+            this.startbutton.setVisible(true);
             return;
         }
         this.splat.runAction(cc.Sequence.create(
@@ -139,11 +143,6 @@ var HelloWorldLayer = cc.Layer.extend({
         // 1. super init first
         this._super();
 
-        /////////////////////////////
-        // 2. add a menu item with "X" image, which is clicked to quit the program
-        //    you may modify it.
-        // ask the window size
-        
         
         
         
@@ -160,13 +159,29 @@ var HelloWorldLayer = cc.Layer.extend({
         this.addKeyboardEvents();
         
 
+        this.startbutton = new cc.MenuItemImage(
+            res.start_button,
+            res.start_button,
+            this.start
+            ,this);
+        this.startbutton.setAnchorPoint(0.5, 0.5);
 
+        var menu = new cc.Menu(this.startbutton);
+        menu.setPosition(cc.winSize.width /2, cc.winSize.height /2);
+        this.addChild(menu);
+        //closeItem.setPosition(cc.winSize.width - 20, 20);
+        //closeItem.setPosition(cc.winSize.width /2, cc.winSize.height /2);
 
-
-        this.start();
+        //this.start();
         return true;
     },
     start: function(){
+        this.lives = 3;
+        this.points = 0;
+        this.labellives.setString("Lives:" + this.lives)
+        this.labelpoints.setString("Points:" + this.points);
+        this.splat.setOpacity(0);
+        this.startbutton.setVisible(false);
         this.generateAsteroid();
         cc.audioEngine.playMusic("/res/bg.mp3", true);
     }

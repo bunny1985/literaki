@@ -3,7 +3,8 @@
     plist_plist : 'res/res.plist',
     plist_png : 'res/res.png', 
     explosion_list: "res/explosion.plist",
-    explosion_png: "res/explosion.png"
+    explosion_png: "res/explosion.png",
+    start_button: "res/start.png"
 };
 
 
