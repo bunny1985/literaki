@@ -25,7 +25,7 @@ var Asteroid = cc.Sprite.extend({
     },
 
     playLetter: function(){
-        cc.audioEngine.stopAllEffects();
+        //cc.audioEngine.stopAllEffects();
             cc.audioEngine.playEffect("res/alfabet/" + this.letter+ ".mp3", false); 
     },
     

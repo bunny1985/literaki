@@ -99,13 +99,13 @@ var HelloWorldLayer = cc.Layer.extend({
                     event: cc.EventListener.KEYBOARD,
                     onKeyPressed:(key, event) =>  {
                         if(! this.asteroidready)return ;
-                        console.log(key);
+
                         if(this.sprite.letter.charCodeAt(0) -32== key || this.sprite.letter.charCodeAt(0) == key){
-                            console.log("BUm");
+            
 
                         this.explode();
                         var explosionsound  = getRandomInt(1, 3);
-                        cc.audioEngine.playEffect("/res/explosion" + explosionsound+ ".wav", false);
+                        cc.audioEngine.playEffect("res/explosion" + explosionsound+ ".wav", false);
                         }else if(key==13){
                             this.labelletter.setVisible(true);
                             this.points-=100;
@@ -114,7 +114,7 @@ var HelloWorldLayer = cc.Layer.extend({
                             this.sprite.playLetter();
                         }
                         else{
-                            cc.audioEngine.playEffect("/res/shot.wav", false);
+                            cc.audioEngine.playEffect("res/shot.wav", false);
                         }
                         
                     },
@@ -153,8 +153,10 @@ var HelloWorldLayer = cc.Layer.extend({
         this.addLabels();
         
         
-        cc.audioEngine.setMusicVolume(0.2);
+     
         cc.audioEngine.setEffectsVolume(1.0);
+        cc.audioEngine.stopAllEffects();
+        cc.audioEngine.playEffect("res/hit/hit1.mp3", false);
         
         this.addKeyboardEvents();
         
@@ -183,7 +185,10 @@ var HelloWorldLayer = cc.Layer.extend({
         this.splat.setOpacity(0);
         this.startbutton.setVisible(false);
         this.generateAsteroid();
-        cc.audioEngine.playMusic("/res/bg.mp3", true);
+        
+        cc.audioEngine.playMusic("res/bg.mp3", true);
+        cc.audioEngine.setMusicVolume(0.2);
+        
     }
 });
 
